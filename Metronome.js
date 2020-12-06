@@ -2,7 +2,6 @@ const MINUTE_IN_MILLISECONDS = 60000;
 
 class Metronome {
     constructor (config) {
-        this.bpm = config.bpm;
         this.min = config.min;
         this.max = config.max;
         this.audio = config.audio;
@@ -11,12 +10,10 @@ class Metronome {
         this.weightNode = config.nodes.weight;
         this.bpmNode = config.nodes.bpm;
         this.sliderNode = config.nodes.slider;
-        this.minusNode = config.nodes.minus;
-        this.plusNode = config.nodes.plus;
         this.playNode = config.nodes.play;
 
         this.interval = null;
-        this.intervalDuration = MINUTE_IN_MILLISECONDS / this.bpm;
+        this.intervalDuration = MINUTE_IN_MILLISECONDS / this.min;
     }
 
     playAudio () {
@@ -52,20 +49,6 @@ class Metronome {
     // for some reason array.prototype.includes doesn't work on my firefox
     contains = (array, item) => array.indexOf(item) > -1;
 
-    incrementBPM = () => {
-        if (this.sliderNode.value < RANGE_MAX) {
-            this.sliderNode.value++;
-            +this.bpmNode.innerText++;
-        }
-    }
-
-    decrementBPM = () => {
-        if (this.sliderNode.value > RANGE_MIN) {
-            this.sliderNode.value--;
-            +this.bpmNode.innerText--;
-        }
-    }
-
     togglePlayButton = (e) => {
             const self = e.target;
             const classList = Array.from(self.classList);
@@ -82,15 +65,16 @@ class Metronome {
 
     }
 
-    updateBPM = () => this.bpmNode.innerText = this.sliderNode.value;
+    updateBPM = () => {
+        this.bpmNode.innerText = this.sliderNode.value;
+        this.intervalDuration = MINUTE_IN_MILLISECONDS / this.sliderNode.value;
+    }
 
     init () {
         this.sliderNode.max = this.max;
         this.sliderNode.min = this.sliderNode.value = this.bpmNode.innerText = this.min;
 
         this.playNode.addEventListener('click', (e) => this.toggleMetronome(e));
-        this.plusNode.addEventListener('click', () => this.incrementBPM());
-        this.minusNode.addEventListener('click', () => this.decrementBPM());
         this.sliderNode.addEventListener('input', () => this.updateBPM());
     }
 }

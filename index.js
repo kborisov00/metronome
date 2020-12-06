@@ -12,8 +12,6 @@ const metronome = new Metronome({
         weight: document.getElementById('weight'),
         bpm: document.getElementById('bpm'),
         slider: document.getElementById('slider'),
-        minus: document.getElementById('slider-btn-minus'),
-        plus: document.getElementById('slider-btn-plus'),
         play: document.getElementById('play-button')
     }
 });
