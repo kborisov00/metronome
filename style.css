@@ -1,0 +1,119 @@
+/* reset styles */
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;700&display=swap');
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body, html {
+    font-family: 'Open Sans', sans-serif;
+    position: relative;
+    overflow: hidden;
+}
+:root {
+    --primary:#0962ba;
+}
+/* reusable styles */
+.container {
+    padding: 5% 15%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.flex-between-center {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+/* metronome */
+.metronome {
+    height: 400px;
+    position: relative !important;
+}
+.bpm {
+    font-weight: 300;
+}
+.bpm__counter {
+    font-size: 2rem;
+    font-weight: 400;
+}
+.animation {
+    transform-origin: bottom;
+    animation: pendulum 1s linear infinite;
+}
+.play-button {
+    height: 40px;
+    width: 40px;
+    line-height: 40px !important; /* override font-awesome style */
+    text-align: center;
+    background: var(--primary);
+    color: #fff;
+    border-radius: 50%;
+}
+
+.slider-container {
+    margin-top: 20px;
+}
+
+.slider-container__minus, .slider-container__plus {
+    font-size: 2.5rem;
+    color: var(--primary);
+    background: none;
+    border: none;
+    font-weight: 800;
+}
+
+.slider-container__minus {margin-right: 10px;}
+.slider-container__plus {margin-left: 10px;}
+
+.slider {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 100%;
+    height: 5px;
+    border-radius: 10px; 
+    background: #ced6e0;
+    outline: none;
+}
+
+.slider, .slider-container__minus, .slider-container__plus, .play-button {
+    opacity: 0.7;
+    cursor: pointer;
+    -webkit-transition: 200ms;
+    transition: opacity 200ms;
+}
+
+.slider:hover, .slider-container__minus:hover, .slider-container__plus:hover, .play-button:hover {
+    opacity: 1;
+}
+
+.slider::-webkit-slider-thumb  {
+    -webkit-appearance: none;
+    appearance: none;
+
+    width: 25px;
+    height: 25px;
+
+    border: none;
+    border-radius: 50%;
+    background: var(--primary);
+
+    cursor: pointer;
+}
+
+.slider::-moz-range-thumb {
+    width: 25px;
+    height: 25px;
+
+    border: none;
+    border-radius: 50%;
+    background: var(--primary);
+
+    cursor: pointer;
+}
+@keyframes pendulum {
+    0% { transform: rotate(-20deg); }
+    50% { transform: rotate(20deg); }
+    100% { transform: rotate(-20deg); }
+}

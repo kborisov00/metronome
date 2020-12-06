@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA==" crossorigin="anonymous" />
+</head>
+<body>
+    <div class="container">
+        <svg class="metronome" version="1.1" viewBox="9.8 9.8 137.3 207.4" xmlns="http://www.w3.org/2000/svg"><defs></defs>
+            <path class="back" fill="#0962ba" stroke="#000000" d="M78.40402866513374,210L10,22.06147584281831A200,200,40,0,1,146.80805733026747,22.06147584281831L78.40402866513374,210" stroke-width="0"></path>
+            <path id="pendulum" class="pendulum" fill="none" stroke="#eeeeee" d="M78.40402866513374,215V20" stroke-width="5"></path>
+            <path id="weight" class="weight" fill="#666666" stroke="#000000" d="M78.40402866513374,110H90.40402866513374L87.40402866513374,128H69.40402866513374L66.40402866513374,110H78.40402866513374" stroke-width="0"></path>
+            <circle cx="78.40402866513374" cy="210" r="7" fill="#cccccc" stroke="#000" stroke-width="0"></circle>
+        </svg>
+
+        <h3 class="bpm">
+            <span id="bpm" class="bpm__counter">120</span> bpm
+        </h3>
+        
+        <div class="slider-container flex-between-center">
+            <i id="slider-btn-minus" class="slider-container__minus fas fa-minus"></i>
+            <input id="slider" type="range" class="slider">
+            <i id="slider-btn-plus" class="slider-container__plus fas fa-plus"></i>
+        </div>
+
+        <i id="play-button" class="play-button fas fa-play"></i>
+
+    </div>
+    <script src="Metronome.js"></script>
+    <script src="index.js"></script>
+</body>
+</html>
