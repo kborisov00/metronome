@@ -16,13 +16,27 @@ class Metronome {
         this.intervalDuration = MINUTE_IN_MILLISECONDS / this.min;
     }
 
+    // for some reason array.prototype.includes doesn't work on my firefox
+    contains = (array, item) => array.indexOf(item) > -1;
+
     playAudio () {
         const audio = new Audio(this.audio); 
         audio.play(); 
     }
 
+    updateBPM = () => {
+        this.bpmNode.innerText = this.sliderNode.value;
+        this.intervalDuration = MINUTE_IN_MILLISECONDS / this.sliderNode.value;
+    }
+
     updateAnimationDuration () {
         this.pendulumNode.style.animationDuration = this.weightNode.style.animationDuration = `${this.intervalDuration * 2}ms`;
+    }
+
+    toggleAnimation () {
+        this.updateAnimationDuration();
+        this.pendulumNode.classList.toggle('animation');
+        this.weightNode.classList.toggle('animation');
     }
 
     toggleSound () {
@@ -34,40 +48,25 @@ class Metronome {
         }
     }
 
-    toggleAnimation () {
-        this.updateAnimationDuration();
-        this.pendulumNode.classList.toggle('animation');
-        this.weightNode.classList.toggle('animation');
-    }
-
-    toggleMetronome (e) {
-        this.toggleAnimation();
-        this.toggleSound();
-        this.togglePlayButton(e);
-    }
-
-    // for some reason array.prototype.includes doesn't work on my firefox
-    contains = (array, item) => array.indexOf(item) > -1;
-
-    togglePlayButton = (e) => {
-            const self = e.target;
-            const classList = Array.from(self.classList);
+    togglePlayButton = () => {
+            const classList = Array.from(this.playNode.classList);
             const playClass = 'fa-play';
             const pauseClass = 'fa-pause';
             
             if (this.contains(classList, playClass)) {
-                self.classList.remove(playClass);
-                self.classList.add(pauseClass);
+                this.playNode.classList.remove(playClass);
+                this.playNode.classList.add(pauseClass);
             } else {
-                self.classList.remove(pauseClass);
-                self.classList.add(playClass);
+                this.playNode.classList.remove(pauseClass);
+                this.playNode.classList.add(playClass);
             }
 
     }
 
-    updateBPM = () => {
-        this.bpmNode.innerText = this.sliderNode.value;
-        this.intervalDuration = MINUTE_IN_MILLISECONDS / this.sliderNode.value;
+    toggleMetronome () {
+        this.toggleAnimation();
+        this.toggleSound();
+        this.togglePlayButton();
     }
 
     init () {
@@ -75,6 +74,9 @@ class Metronome {
         this.sliderNode.min = this.sliderNode.value = this.bpmNode.innerText = this.min;
 
         this.playNode.addEventListener('click', (e) => this.toggleMetronome(e));
-        this.sliderNode.addEventListener('input', () => this.updateBPM());
+        this.sliderNode.addEventListener('input', () => {
+            if (this.interval) this.toggleMetronome();
+            this.updateBPM();
+        });
     }
 }

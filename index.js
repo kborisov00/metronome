@@ -3,7 +3,6 @@ const RANGE_MIN = 40;
 const RANGE_MAX = 220;
 
 const metronome = new Metronome({
-    bpm: 120,
     min: RANGE_MIN,
     max: RANGE_MAX,
     audio: TICK_SOUND,

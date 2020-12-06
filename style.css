@@ -15,6 +15,7 @@ body, html {
     font-family: 'Open Sans', sans-serif;
     position: relative;
     overflow: hidden;
+    background: #f5f6fa;
 }
 
 /* reusable styles */
@@ -59,7 +60,7 @@ body, html {
 }
 
 .slider-container {
-    width: 40%;
+    width: 30%;
     margin-top: 20px;
     display: flex;
     align-items: center;
