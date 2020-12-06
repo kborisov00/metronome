@@ -1,3 +1,3 @@
-## Metronome.js
+## Metronome Web Appliacation
 
-Made by Kristiyan Genkov
+Made with 💖 for Devrix by **Kristiyan Genkov**
