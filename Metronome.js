@@ -24,7 +24,7 @@ class Metronome {
         audio.play(); 
     }
 
-    updateBPM = () => {
+    updateBPM () {
         this.bpmNode.innerText = this.sliderNode.value;
         this.intervalDuration = MINUTE_IN_MILLISECONDS / this.sliderNode.value;
     }
@@ -48,7 +48,7 @@ class Metronome {
         }
     }
 
-    togglePlayButton = () => {
+    togglePlayButton () {
             const classList = Array.from(this.playNode.classList);
             const playClass = 'fa-play';
             const pauseClass = 'fa-pause';
