@@ -73,7 +73,7 @@ class Metronome {
         this.sliderNode.max = this.max;
         this.sliderNode.min = this.sliderNode.value = this.bpmNode.innerText = this.min;
 
-        this.playNode.addEventListener('click', (e) => this.toggleMetronome(e));
+        this.playNode.addEventListener('click', () => this.toggleMetronome());
         this.sliderNode.addEventListener('input', () => {
             if (this.interval) this.toggleMetronome();
             this.updateBPM();
