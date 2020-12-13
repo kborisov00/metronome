@@ -14,5 +14,3 @@ const metronome = new Metronome({
         play: document.getElementById('play-button')
     }
 });
-
-metronome.init();
