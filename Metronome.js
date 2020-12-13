@@ -12,8 +12,14 @@ class Metronome {
         this.sliderNode = config.nodes.slider;
         this.playNode = config.nodes.play;
 
+        this.playClass = 'fa-play';
+        this.pauseClass = 'fa-pause';
+
         this.interval = null;
         this.intervalDuration = MINUTE_IN_MILLISECONDS / this.min;
+
+        // initialize metronome
+        this.init();
     }
 
     // for some reason array.prototype.includes doesn't work on my firefox
@@ -48,18 +54,19 @@ class Metronome {
         }
     }
 
+    setPauseClass () {
+        this.playNode.classList.remove(this.playClass);
+        this.playNode.classList.add(this.pauseClass);
+    }
+
+    setPlayClass () {
+        this.playNode.classList.remove(this.pauseClass);
+        this.playNode.classList.add(this.playClass);
+    }
+
     togglePlayButton () {
-            const classList = Array.from(this.playNode.classList);
-            const playClass = 'fa-play';
-            const pauseClass = 'fa-pause';
-            
-            if (this.contains(classList, playClass)) {
-                this.playNode.classList.remove(playClass);
-                this.playNode.classList.add(pauseClass);
-            } else {
-                this.playNode.classList.remove(pauseClass);
-                this.playNode.classList.add(playClass);
-            }
+        const classList = Array.from(this.playNode.classList);
+        this.contains(classList, this.playClass) ? this.setPauseClass() : this.setPlayClass();
 
     }
 
@@ -69,14 +76,16 @@ class Metronome {
         this.togglePlayButton();
     }
 
+    handleInput () {
+        if (this.interval) this.toggleMetronome();
+        this.updateBPM();
+    }
+
     init () {
         this.sliderNode.max = this.max;
         this.sliderNode.min = this.sliderNode.value = this.bpmNode.innerText = this.min;
 
         this.playNode.addEventListener('click', () => this.toggleMetronome());
-        this.sliderNode.addEventListener('input', () => {
-            if (this.interval) this.toggleMetronome();
-            this.updateBPM();
-        });
+        this.sliderNode.addEventListener('input', () => this.handleInput());
     }
 }
